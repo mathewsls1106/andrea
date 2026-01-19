@@ -33,6 +33,17 @@ class S3Manejador:
         except Exception as e:
             print(f"error al subir archivo: {e}")
             return False
+    def subir_archivo_por_ruta(self, ruta_archivo: Path) -> bool:
+        """
+        sube un archivo al bucket desde una ruta local
+        """
+        try:
+            self.s3.upload_file(str(ruta_archivo), self.nombre_bucket, ruta_archivo.name)
+            print("subida correctamente")
+            return True
+        except Exception as e:
+            print(f"error al subir archivo: {e}")
+            return False
 
     def descargar_archivo(self, nombre_archivo: str) -> Optional[bytes]:
         """
